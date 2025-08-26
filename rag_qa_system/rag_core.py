@@ -51,10 +51,10 @@ def add_documents(docs: List[Document], source_label: str) -> int:
     for d in docs:
         d.metadata = d.metadata or {}
         d.metadata.setdefault("source", source_label)
-        chunks = chunks_from_documents(docs)
-        vs = get_or_create_vectorstore()
-        vs.add_documents(chunks)
-        return len(chunks)
+    chunks = chunks_from_documents(docs)
+    vs = get_or_create_vectorstore()
+    vs.add_documents(chunks)
+    return len(chunks)
 
 # Prompt with citation markers
 PROMPT = ChatPromptTemplate.from_messages([
