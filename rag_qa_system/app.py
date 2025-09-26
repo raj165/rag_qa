@@ -8,6 +8,7 @@ import shutil
 import pathlib
 from rag_qa_system.loaders import load_pdf, load_txt, load_site
 from rag_qa_system.rag_core import add_documents, answer
+from rag_qa_system.web_search import web_search_agent
 load_dotenv()
 
 
@@ -18,6 +19,10 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 class AskRequest(BaseModel):
     question: str
+
+class SearchRequest(BaseModel):
+    query: str
+    domains: List[str] | None = None  # Optional domain filter
 
 @app.post("/ingest/file")
 async def ingest_file(file: UploadFile = File(...)):
@@ -53,6 +58,12 @@ async def ask(req: AskRequest):
         if src and src not in citations:
             citations.append(src)
     return {"answer": content, "sources": citations}
+
+
+@app.post("/search")
+async def search(req: SearchRequest):
+    result = web_search_agent(req.query, domains=req.domains)
+    return {"answer": result}
 
 @app.get("/")
 async def root():

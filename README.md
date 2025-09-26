@@ -5,12 +5,14 @@ A FastAPI-based **Retrieval-Augmented Generation (RAG)** system that lets you in
 ---
 
 ##  Features
-🔹 Ingest **PDF, TXT, MD, LOG files** via REST API  
-🔹 Ingest **websites** (URL → clean text)  
-🔹 Automatic **chunking** (~1200 tokens, with overlap)  
-🔹 Embedding + storage in **Chroma** (local persistent vector DB)  
-🔹 Ask questions and get answers with **inline citations**  
-🔹 Strict RAG prompt → never hallucinates, returns *“I don’t know”* if not found  
-🔹 Sources tracked and returned with every answer  
+*  Ingest PDF, TXT, MD, LOG files via REST API
+*  Ingest websites (URL → clean text)\
+*  Ingest web search results (e.g., query site:domain.com) → fetch & clean pages automatically
+*  Automatic chunking (~1200 tokens, with overlap)
+*  Embedding + storage in Chroma (local persistent vector DB)
+*  Ask questions and get answers with inline citations
+*  Strict RAG prompt → never hallucinates, returns “I don’t know” if not found
+*  Sources tracked and returned with every answer 
 
 ---
+
